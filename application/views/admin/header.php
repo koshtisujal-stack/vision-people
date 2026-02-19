@@ -145,6 +145,30 @@
 					</a>
 				</li>
 
+
+				<li>
+    <a href="javascript:;" class="has-arrow">
+        <div class="parent-icon"><i class="fa fa-bullhorn"></i></div>
+        <div class="menu-title">Announcements</div>
+    </a>
+    <ul>
+        <li>
+    <a href="<?= base_url('admin/announcements') ?>">
+        Announcement List
+    </a>
+</li>
+
+<li>
+    <a href="<?= base_url('admin/announcements/add') ?>">
+        Add Announcement
+    </a>
+</li>
+
+    </ul>
+</li>
+
+
+
 			</ul>
 		</div>
 		<!--end sidebar wrapper -->
@@ -586,7 +610,8 @@
 							<img
 								src="<?= !empty($userPhoto)
 											? base_url('uploads/profile/' . $userPhoto)
-											: base_url('assets/images/avatars/avatar-2.png'); ?>"
+											: base_url('uploads\profile\5ae061698011c1dede095beff867fcc6.png'); ?>"
+											
 								class="user-img rounded-circle"
 								width="40"
 								height="40"
@@ -600,7 +625,7 @@
 
 								</p>
 								<p class="designattion mb-0 text-muted small">
-									<?= isset($userRole) ? $userRole : '' ?>
+									Admin
 								</p>
 							</div>
 						</a>
@@ -618,7 +643,11 @@
 							<li>
 								<div class="dropdown-divider mb-0"></div>
 							</li>
-							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
+							<li><a href="<?= base_url('admin/logout') ?>" 
+   onclick="return confirm('Are you sure you want to logout?')"
+   class="dropdown-item">
+    <i class="bx bx-log-out-circle"></i> Logout
+</a>
 							</li>
 						</ul>
 					</div>

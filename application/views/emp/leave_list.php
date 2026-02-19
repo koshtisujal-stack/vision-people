@@ -42,7 +42,7 @@
 
 		<ul class="metismenu" id="menu">
 			<li>
-				<a href="<?= base_url('emp/dashboardd') ?>">
+				<a href="<?= base_url('emp/dashboard') ?>">
 					<div class="parent-icon"><i class="bx bx-home"></i></div>
 					<div class="menu-title">Dashboard</div>
 				</a>

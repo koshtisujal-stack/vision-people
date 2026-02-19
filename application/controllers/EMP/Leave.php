@@ -61,21 +61,23 @@ class Leave extends CI_Controller {
     }
 
    
-    public function store()
-    {
-        $this->db->insert('leaves', [
-            
-            'user_id'    => $this->input->post('user_id'),
+ public function store()
+{
+    $this->db->insert('leaves', [
 
-            'leave_date' => $this->input->post('leave_date'),
+        // ✅ SESSION se logged in employee lo
+        'user_id'    => $this->session->userdata('user_id'),
 
-          
-            'leave_type' => $this->input->post('leave_type'),
+        'leave_date' => $this->input->post('leave_date'),
+        'leave_type' => $this->input->post('leave_type'),
+        'reason'     => $this->input->post('reason'),
 
-            'reason'     => $this->input->post('reason'),
-            'status'     => 'Pending'
-        ]);
+        // ✅ Default Pending hi rahega
+        'status'     => 'Pending'
+    ]);
 
-        redirect('emp/leave');
-    }
+    redirect('emp/leave');
+}
+
+
 }

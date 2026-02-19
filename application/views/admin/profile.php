@@ -47,7 +47,7 @@
                                     </div>
 
                                     <h4><?= htmlspecialchars($user->name); ?></h4>
-                                    <p class="text-secondary mb-1"><?= htmlspecialchars($user->role ?? 'User'); ?></p>
+                                    <p class="text-secondary mb-1">Admin</p>
                                     <p class="text-muted font-size-sm">
                                         <?= htmlspecialchars($user->address ?? ''); ?>
                                     </p>

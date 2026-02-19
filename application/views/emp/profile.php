@@ -7,7 +7,8 @@
         </div>
 
         <!-- ================= PROFILE FORM ================= -->
-       <form action="<?= site_url('emp/dashboardd/update_profile'); ?>" method="post" enctype="multipart/form-data">
+      <form action="<?= site_url('emp/profile/update'); ?>" method="post" enctype="multipart/form-data">
+
 
 
 
@@ -116,11 +117,17 @@
 
                                     <div class="row">
                                         <div class="col-sm-3"></div>
-                                        <div class="col-sm-9">
-                                            <button type="submit" class="btn btn-primary px-4">
-                                                Save Changes
-                                            </button>
-                                        </div>
+                                       <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary px-4">
+        Save Changes
+    </button>
+
+    <a href="<?= base_url('emp/change-password'); ?>"
+       class="btn btn-outline-danger px-4">
+        Change Password
+    </a>
+</div>
+
                                     </div>
 
                                 </div>

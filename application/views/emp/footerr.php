@@ -213,7 +213,7 @@ Notification.requestPermission().then(permission => {
     .then(token => {
       console.log("🔥 FCM TOKEN:", token);
 
-      fetch("<?= base_url('emp/dashboardd/save_fcm_token') ?>", {
+      fetch("<?= base_url('emp/dashboard/save_fcm_token') ?>", {
 
         method: "POST",
         headers: { "Content-Type": "application/json" },
