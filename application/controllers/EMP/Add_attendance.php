@@ -5,22 +5,29 @@ class Add_attendance extends CI_Controller {
 
     public function __construct()
     {
+       
         parent::__construct();
         $this->load->database();
+    
         $this->load->library('session');
         $this->load->helper('url');
         $this->load->model('emp/Attendance_model');
 
         if (
             !$this->session->userdata('logged_in') ||
-            $this->session->userdata('user_role') !== 'emp'
-        ) {
+            $this->session->userdata('user_role') !== '0'
+            ) {
+
+            }else{
             redirect('sign_in');
-        }
+
+            }
+           
     }
 
     public function index()
     {
+        
         $user_id = $this->session->userdata('user_id');
 
         
@@ -30,8 +37,11 @@ class Add_attendance extends CI_Controller {
             'already_marked' => $already ? true : false
         ];
 
-      
-        $this->load->view('emp/attendance_add', $data);
+   $data['userName'] = $this->session->userdata('user_name');
+
+$this->load->view('emp/headerr', $data);
+$this->load->view('emp/attendance_add', $data);
+$this->load->view('emp/footerr');
     }
 
     public function save()

@@ -19,9 +19,9 @@ class Dashboard extends CI_Controller {
         redirect('sign_in');
     }
 
-    if ($this->session->userdata('user_role') !== 'emp') {
-        redirect('admin/dashboard');
-    }
+if ($this->session->userdata('user_role') == 1) {
+    redirect('admin/dashboard');
+}
 }
 
     protected function headerData()
@@ -35,49 +35,84 @@ class Dashboard extends CI_Controller {
 
  public function index()
 {
-    $data = $this->headerData();
-    $user_id = $this->session->userdata('user_id');
 
-    $this->load->model('emp/Dashboard_model');
+$data = $this->headerData();   // FIRST HEADER DATA
 
-    $data['hour_logs'] = $this->Dashboard_model->get_hourly_logs($user_id);
-    $data['breaks'] = $this->Dashboard_model->get_today_breaks($user_id);
-    $data['break_summary'] = $this->Dashboard_model->get_today_break_summary($user_id);
+$this->load->model('emp/Dashboard_model');  // MODEL LOAD
 
-    $bs = (int)$data['break_summary']->total_seconds;
-    $data['formattedBreakTime'] = sprintf(
-        '%02dh %02dm %02ds',
-        floor($bs/3600),
-        floor(($bs%3600)/60),
-        $bs%60
-    );
+$data['today_breaks'] = $this->Dashboard_model->today_breaks(); // THEN BREAKS
 
-    $ws = $this->Dashboard_model->get_today_work_total($user_id);
-    $data['formattedWorkTime'] = sprintf(
-        '%02dh %02dm %02ds',
-        floor($ws/3600),
-        floor(($ws%3600)/60),
-        $ws%60
-    );
+// echo "hh";
+// die;
 
-    $today = date('Y-m-d');
-
-    $data['report_submitted'] = $this->db
-        ->where('employee_id', $user_id)
-        ->where('report_date', $today)
-        ->get('daily_reports')
-        ->row() ? true : false;
+// 🎂 Upcoming Birthdays (Next 7 days)
+$data['upcoming_birthdays'] = $this->db->query("
+SELECT id,name,dob,photo
+FROM users
+WHERE role = 0
+AND
+(
+   DATE_ADD(
+     STR_TO_DATE(CONCAT(YEAR(CURDATE()),'-',MONTH(dob),'-',DAY(dob)),'%Y-%m-%d'),
+     INTERVAL 
+     IF(
+       STR_TO_DATE(CONCAT(YEAR(CURDATE()),'-',MONTH(dob),'-',DAY(dob)),'%Y-%m-%d') < CURDATE(),
+       1,
+       0
+     ) YEAR
+   )
+   BETWEEN CURDATE() AND DATE_ADD(CURDATE(),INTERVAL 7 DAY)
+)
+ORDER BY dob
+")->result();
 
 
-    // 🔥🔥🔥 TODAY APPROVED LEAVES FOR ALL EMPLOYEES
- $this->db->select('employees.name, leaves.leave_type, leaves.reason, leaves.created_at');
+// 👨‍💻 All Employees with Skills
+$data['emp_skills'] = $this->db
+->where('role',0)
+->get('users')
+->result();
+
+
+$user_id = $this->session->userdata('user_id');   // ❌ DATA RESET LINE REMOVED
+
+$data['hour_logs'] = $this->Dashboard_model->get_hourly_logs($user_id);
+$data['breaks'] = $this->Dashboard_model->get_today_breaks($user_id);
+$data['break_summary'] = $this->Dashboard_model->get_today_break_summary($user_id);
+
+$bs = (int)$data['break_summary']->total_seconds;
+$data['formattedBreakTime'] = sprintf(
+    '%02dh %02dm %02ds',
+    floor($bs/3600),
+    floor(($bs%3600)/60),
+    $bs%60
+);
+
+$ws = $this->Dashboard_model->get_today_work_total($user_id);
+$data['formattedWorkTime'] = sprintf(
+    '%02dh %02dm %02ds',
+    floor($ws/3600),
+    floor(($ws%3600)/60),
+    $ws%60
+);
+
+$today = date('Y-m-d');
+
+$data['report_submitted'] = $this->db
+    ->where('employee_id', $user_id)
+    ->where('report_date', $today)
+    ->get('daily_reports')
+    ->row() ? true : false;
+
+
+// 🔥🔥🔥 TODAY APPROVED LEAVES FOR ALL EMPLOYEES
+$this->db->select('users.name, leaves.leave_type, leaves.reason, leaves.created_at');
 $this->db->from('leaves');
-$this->db->join('employees','employees.id = leaves.user_id'); // ✅ FIXED
+$this->db->join('users','users.id = leaves.user_id');
 $this->db->where('DATE(leaves.leave_date)', date('Y-m-d'));
 $this->db->where('leaves.status', 'Approved');
 
 $data['today_leaves'] = $this->db->get()->result();
-
 
 
 // 🔥 UPCOMING HOLIDAYS (NEXT 4)
@@ -92,22 +127,17 @@ $this->db->limit(4);
 $data['upcoming_holidays'] = $this->db->get()->result();
 
 
-
 // 🔥 ANNOUNCEMENTS
 $this->db->order_by('id','DESC');
 $this->db->limit(5);
 $data['announcements'] = $this->db->get('announcements')->result();
 
 
-
-
-
-    // ✅ LOAD VIEW ONLY ONCE
-    $this->load->view('emp/headerr',$data);
-    $this->load->view('emp/dashboard',$data);
-    $this->load->view('emp/footerr');
+// ✅ LOAD VIEW ONLY ONCE
+$this->load->view('emp/headerr',$data);
+$this->load->view('emp/dashboard',$data);
+$this->load->view('emp/footerr');
 }
-
 
 
 

@@ -42,11 +42,12 @@ class Holidays extends CI_Controller {
         ->row();
 
     $data['year'] = $year;
-    $data['holidays'] = $this->db
-        ->where('YEAR(holiday_date)', $year)
-        ->order_by('holiday_date', 'ASC')
-        ->get('holidays')
-        ->result();
+   $today = date('Y-m-d');
+
+$this->db->where('holiday_date >=', $today);
+$this->db->order_by('holiday_date', 'ASC');
+
+$data['holidays'] = $this->db->get('holidays')->result();
 
     $this->load->view('emp/headerr', $data);
     $this->load->view('emp/holidays', $data);

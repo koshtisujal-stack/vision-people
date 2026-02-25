@@ -31,8 +31,8 @@ $route['admin/leave/approve/(:num)'] = 'admin/Leave/approve/$1';
 $route['admin/leave/reject/(:num)']  = 'admin/Leave/reject/$1';
 
 $route['admin/history']            = 'admin/History/index';
-$route['admin/profile']            = 'admin/Dashboard/profile';
-$route['admin/profile/update']     = 'admin/Dashboard/update_profile';
+$route['admin/profile'] = 'admin/Profile';
+$route['admin/profile/update'] = 'admin/Profile/update_profile';
 
 $route['admin/holidays/add']       = 'admin/Holidays/add';
 $route['admin/save-fcm-token']     = 'admin/Dashboard/save_fcm_token';
@@ -44,7 +44,7 @@ $route['emp/dashboard']        = 'emp/Dashboard/index';
 $route['emp/profile']          = 'emp/Dashboard/profile';
 $route['emp/profile/update']   = 'emp/Dashboard/update_profile';
 
-$route['emp/attendance_add']   = 'emp/Add_attendance/index';
+$route['emp/attendance_add']   = 'emp/Add_attendance';
 $route['emp/save_attendance']  = 'emp/Add_attendance/save';
 $route['emp/attendance_list']  = 'emp/Attendance/attendance_list';
 
@@ -87,7 +87,14 @@ $route['admin/announcements/store']  = 'admin/Announcements/store';
 
 
 
-$route['admin/(:any)/(:any)'] = 'admin/$1/$2';
-$route['admin/(:any)']        = 'admin/$1';
-$route['admin']               = 'admin/dashboard';
 
+$route['admin/holidays/update/(:num)'] = 'admin/holidays/update/$1';
+$route['admin/holidays/delete/(:num)'] = 'admin/holidays/delete/$1';
+
+
+
+$route['admin/announcements/delete/(:num)'] = 'admin/announcements/delete/$1';
+
+
+$route['admin/change-password'] = 'admin/change_password';
+$route['admin/change-password/save'] = 'admin/change_password/save';

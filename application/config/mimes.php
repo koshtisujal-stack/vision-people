@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -74,8 +74,16 @@ return array(
 	'wav'	=>	array('audio/x-wav', 'audio/wave', 'audio/wav'),
 	'bmp'	=>	array('image/bmp', 'image/x-bmp', 'image/x-bitmap', 'image/x-xbitmap', 'image/x-win-bitmap', 'image/x-windows-bmp', 'image/ms-bmp', 'image/x-ms-bmp', 'application/bmp', 'application/x-bmp', 'application/x-win-bitmap'),
 	'gif'	=>	'image/gif',
-	'jpeg'	=>	array('image/jpeg', 'image/pjpeg'),
-	'jpg'	=>	array('image/jpeg', 'image/pjpeg'),
+	'jpeg' => [
+    'image/jpeg',
+    'image/pjpeg'
+],
+	'jpg' => [
+		'image/jpeg',
+		'image/pjpeg',
+		'image/jpg'
+	],
+
 	'jpe'	=>	array('image/jpeg', 'image/pjpeg'),
 	'jp2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
 	'j2k'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
@@ -85,7 +93,10 @@ return array(
 	'jpm'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
 	'mj2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
 	'mjp2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'png'	=>	array('image/png', 'image/x-png'),
+	'png' => [
+    'image/png',
+    'image/x-png'
+],
 	'tiff'	=>	'image/tiff',
 	'tif'	=>	'image/tiff',
 	'heic' 	=>	'image/heic',

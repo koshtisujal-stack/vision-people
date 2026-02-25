@@ -12,6 +12,11 @@ class Dashboard extends CI_Controller {
         }
 
         $this->load->model('Admin_model');
+        
+     if ($this->session->userdata('user_role') == 0) {
+    redirect('emp/dashboard');
+}
+
     }
 
 private function headerData()
@@ -19,7 +24,7 @@ private function headerData()
     return [
         'userRole'  => $this->session->userdata('user_role'),
         'userName'  => $this->session->userdata('user_name'),
-        'userPhoto' => $this->session->userdata('photo'),
+        'userPhoto' => $this->session->userdata('user_photo'),
     ];
 }
 
@@ -30,8 +35,31 @@ private function headerData()
         $userId = $this->session->userdata('user_id');
 
         $data['user']  = $this->Admin_model->get_user($userId);
+
+     $user = $this->Admin_model->get_user($this->session->userdata('user_id'));
+
+$this->session->set_userdata([
+    'user_name'  => $user->name,
+    'user_email' => $user->email,
+    'user_photo' => $user->photo
+]);   
      
  $today = date('Y-m-d'); 
+
+
+$data['total_employees'] = $this->db
+->where('role',0)
+->count_all_results('users');
+
+$this->db->where('MONTH(holiday_date)', date('m'));
+$this->db->where('YEAR(holiday_date)', date('Y'));
+$data['total_holidays_month'] = $this->db
+->count_all_results('holidays');
+
+$this->db->where('MONTH(created_at)', date('m'));
+$this->db->where('YEAR(created_at)', date('Y'));
+$data['total_announcements_month'] = $this->db
+->count_all_results('announcements');
 
 
 
@@ -41,9 +69,9 @@ private function headerData()
 
 
 $data['manual_break_logs'] = $this->db
-    ->select('break_logs.*, employees.name')
+    ->select('break_logs.*, users.name')
     ->from('break_logs')
-    ->join('employees', 'employees.id = break_logs.user_id')
+    ->join('users', 'users.id = break_logs.user_id')
     ->where('DATE(start_time)', $today)
     ->where('source', 'manual')
     ->get()
@@ -52,8 +80,8 @@ $data['manual_break_logs'] = $this->db
 
 $data['employees'] = $this->db
         ->select('id, name')
-        ->where('role', 'emp')
-        ->get('employees')
+       ->where('role',0)
+->get('users')
         ->result();
 
 

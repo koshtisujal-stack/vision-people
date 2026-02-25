@@ -15,12 +15,15 @@ class Attendance extends CI_Controller {
    $this->load->model('emp/Attendance_model');
 
 
-    if (
-        !$this->session->userdata('logged_in') ||
-        $this->session->userdata('user_role') !== 'emp'
-    ) {
-        redirect('sign_in');
-    }
+     if (
+            !$this->session->userdata('logged_in') ||
+            $this->session->userdata('user_role') !== '0'
+            ) {
+
+            }else{
+            redirect('sign_in');
+
+            }
 }
 
 public function index()

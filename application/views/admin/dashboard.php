@@ -896,7 +896,7 @@
         <div class="row g-4 stat-card-wrapper">
 
             <!-- Present Employees -->
-            <div class="col-md-6 col-xl-3 anim-up delay-2">
+            <!-- <div class="col-md-6 col-xl-3 anim-up delay-2">
                 <div class="stat-card stat-present">
                     <div class="card-body">
                         <div class="stat-icon-wrapper">
@@ -910,10 +910,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- On Leave -->
-            <div class="col-md-6 col-xl-3 anim-up delay-3">
+            <!-- <div class="col-md-6 col-xl-3 anim-up delay-3">
                 <div class="stat-card stat-leave">
                     <div class="card-body">
                         <div class="stat-icon-wrapper">
@@ -925,11 +925,70 @@
                             <span class="live-indicator"></span>
                             Approved leaves today
                         </div>
-                    </div>
+                    </div>  
                 </div>
-            </div>
+            </div> -->
 
         </div>
+
+
+        <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3">
+
+<!-- TOTAL EMPLOYEES -->
+<div class="col">
+<div class="card radius-10 border-start border-0 border-4 border-info">
+<div class="card-body">
+<div class="d-flex align-items-center">
+<div>
+<p class="mb-0 text-secondary">TOTAL EMPLOYEES</p>
+<h4 class="my-1 text-info"><?= $total_employees ?></h4>
+<p class="mb-0 font-13">Active Employees</p>
+</div>
+<div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto">
+<i class="bx bx-group"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- HOLIDAYS -->
+<div class="col">
+<div class="card radius-10 border-start border-0 border-4 border-warning">
+<div class="card-body">
+<div class="d-flex align-items-center">
+<div>
+<p class="mb-0 text-secondary">HOLIDAYS (THIS MONTH)</p>
+<h4 class="my-1 text-warning"><?= $total_holidays_month ?></h4>
+<p class="mb-0 font-13">Monthly Holidays</p>
+</div>
+<div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto">
+<i class="bx bx-calendar-event"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ANNOUNCEMENTS -->
+<div class="col">
+<div class="card radius-10 border-start border-0 border-4 border-primary">
+<div class="card-body">
+<div class="d-flex align-items-center">
+<div>
+<p class="mb-0 text-secondary">ANNOUNCEMENTS</p>
+<h4 class="my-1 text-primary"><?= $total_announcements_month ?></h4>
+<p class="mb-0 font-13">This Month</p>
+</div>
+<div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+<i class="bx bx-megaphone"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
 
         <!-- ========== MANUAL WORK LOG FORM ========== -->
         <div class="form-card anim-up delay-4">
@@ -1096,7 +1155,7 @@
                                                         ->where('id', $m->user_id)
                                                         ->get('employees')
                                                         ->row();
-                                                    $name = $emp->name ?? 'Unknown';
+                                                    // $name = $emp->name ?? 'Unknown';
                                                     echo strtoupper(substr($name, 0, 1));
                                                 ?>
                                             </div>

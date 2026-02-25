@@ -707,6 +707,37 @@
                                         <span id="charCount">0</span> / 300 characters
                                     </div>
                                 </div>
+
+
+<div class="col-md-6">
+    <div class="form-group-custom">
+        <label class="form-label-custom">
+            <i class="bx bx-lock"></i> New Password
+        </label>
+        <div class="input-icon-wrapper">
+            <i class="bx bx-lock-alt input-icon"></i>
+            <input type="password"
+                   name="password"
+                   class="form-control"
+                   placeholder="Leave blank if you don't want to change">
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group-custom">
+        <label class="form-label-custom">
+            <i class="bx bx-lock"></i> Confirm Password
+        </label>
+        <div class="input-icon-wrapper">
+            <i class="bx bx-lock-alt input-icon"></i>
+            <input type="password"
+                   name="confirm_password"
+                   class="form-control"
+                   placeholder="Confirm new password">
+        </div>
+    </div>
+</div>
                             </div>
 
                         </div>

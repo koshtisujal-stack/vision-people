@@ -39,43 +39,47 @@ class Profile extends CI_Controller {
     {
         $id = $this->session->userdata('user_id');
 
-        $data = [
-            'name'    => $this->input->post('name', true),
-            'email'   => $this->input->post('email', true),
-            'phone'   => $this->input->post('phone', true),
-            'address' => $this->input->post('address', true),
-        ];
+     $data = [
+    'name'         => $this->input->post('name', true),
+    'email'        => $this->input->post('email', true),
+    'phone'        => $this->input->post('phone', true),
+    'address'      => $this->input->post('address', true),
+    'designation'  => $this->input->post('designation', true),
+    'skills'       => $this->input->post('skills', true),
+    'aadhar_card'  => $this->input->post('aadhar_card', true),
+    'dob'          => $this->input->post('dob', true),
+];
+if (!empty($_FILES['photo']['name'])) {
 
-        if (!empty($_FILES['photo']['name'])) {
+    $config['upload_path']   = FCPATH . 'uploads/profile/';
+    $config['allowed_types'] = '*';   // 🔥 TEMPORARY FOR TEST
+    $config['max_size']      = 2048;
+    $config['encrypt_name']  = TRUE;
 
-            $config = [
-                'upload_path'   => FCPATH . 'uploads/profile/',
-                'allowed_types' => 'jpg|jpeg|png',
-                'max_size'      => 2048,
-                'encrypt_name'  => true
-            ];
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
 
-            $this->load->library('upload', $config);
+    if (!$this->upload->do_upload('photo')) {
 
-            if ($this->upload->do_upload('photo')) {
-                $upload = $this->upload->data();
-                $data['photo'] = $upload['file_name'];
+        echo $this->upload->display_errors();
+        exit;
 
-                $old = $this->Dashboard_model->get_user_photo($id);
-                if ($old && file_exists(FCPATH.'uploads/profile/'.$old)) {
-                    unlink(FCPATH.'uploads/profile/'.$old);
-                }
+    } else {
 
-                $this->session->set_userdata('user_photo', $data['photo']);
-            }
-        }
+        $upload = $this->upload->data();
+        $data['photo'] = $upload['file_name'];
+
+        $this->session->set_userdata('user_photo', $data['photo']);
+    }
+}
 
         $this->Dashboard_model->update_user($id, $data);
 
-        $this->session->set_userdata([
-            'user_name'  => $data['name'],
-            'user_email' => $data['email']
-        ]);
+       $this->session->set_userdata([
+    'user_name'  => $data['name'],
+    'user_email' => $data['email'],
+    'user_photo' => isset($data['photo']) ? $data['photo'] : $this->session->userdata('user_photo')
+]);
 
         $this->session->set_flashdata('success','Profile updated');
         redirect('emp/profile');
@@ -109,7 +113,7 @@ class Profile extends CI_Controller {
             return;
         }
 
-        $emp = $this->db->where('id',$id)->get('employees')->row();
+        $emp = $this->db->where('id',$id)->get('users')->row();
 
         if (!password_verify($old, $emp->password)) {
             $this->session->set_flashdata('error','Old password wrong');
@@ -117,9 +121,9 @@ class Profile extends CI_Controller {
             return;
         }
 
-        $this->db->where('id',$id)->update('employees',[
-            'password' => password_hash($new, PASSWORD_BCRYPT)
-        ]);
+      $this->db->where('id',$id)->update('users',[
+    'password' => password_hash($new, PASSWORD_BCRYPT)
+]);
 
         $this->session->set_flashdata('success','Password updated successfully');
         redirect('emp/change-password');

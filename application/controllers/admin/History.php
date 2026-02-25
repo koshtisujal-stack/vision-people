@@ -19,9 +19,12 @@ class History extends CI_Controller {
 {
     //  echo "HISTORY CONTROLLER HIT";
     // exit;
- $data['employees'] = $this->db
-        ->select('id, name')
-        ->get('employees')
+$data['employees'] = $this->db
+        ->select('id, email')
+        ->from('users')
+        ->where('role', 0)
+        ->where('is_active', 1)
+        ->get()
         ->result();
 
     $this->load->view('admin/header');
@@ -50,9 +53,9 @@ class History extends CI_Controller {
     
 
     // 👤 employee
-    $data['emp'] = $this->db
+$data['emp'] = $this->db
         ->where('id', $emp_id)
-        ->get('employees')
+        ->get('users')
         ->row();
 
     // ⏸ break logs

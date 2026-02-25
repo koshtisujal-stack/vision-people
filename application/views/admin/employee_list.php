@@ -1081,20 +1081,7 @@
                         <span><?= count($employees) ?> records found</span>
                     </div>
                 </div>
-                <div class="header-actions">
-                    <button class="btn btn-export excel" onclick="exportTable('excel')" data-bs-toggle="tooltip" title="Export to Excel">
-                        <i class="bx bx-spreadsheet"></i>
-                        <span class="d-none d-md-inline">Excel</span>
-                    </button>
-                    <button class="btn btn-export pdf" onclick="exportTable('pdf')" data-bs-toggle="tooltip" title="Export to PDF">
-                        <i class="bx bxs-file-pdf"></i>
-                        <span class="d-none d-md-inline">PDF</span>
-                    </button>
-                    <button class="btn btn-export print" onclick="window.print()" data-bs-toggle="tooltip" title="Print">
-                        <i class="bx bx-printer"></i>
-                        <span class="d-none d-md-inline">Print</span>
-                    </button>
-                </div>
+               
             </div>
 
             <!-- Card Body -->

@@ -37,7 +37,7 @@
                 <div class="card border-0 shadow-sm rounded-4">
                     <div class="card-body p-4 p-md-5">
 
-                        <form method="post" action="<?= site_url('emp/change-password/save') ?>" id="changePasswordForm">
+                        <form method="post" action="<?= site_url('admin/change-password/save') ?>" id="changePasswordForm">
 
                             <!-- Old Password -->
                             <div class="mb-4">

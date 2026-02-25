@@ -45,4 +45,12 @@ class Announcements extends CI_Controller {
 
         redirect('admin/announcements');
     }
+
+    public function delete($id)
+{
+    $this->db->where('id', $id);
+    $this->db->delete('announcements');
+
+    redirect('admin/announcements');
+}
 }

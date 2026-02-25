@@ -182,10 +182,21 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
-        .att-stat-card.total::before { background: linear-gradient(180deg, #667eea, #764ba2); }
-        .att-stat-card.present::before { background: linear-gradient(180deg, #10b981, #059669); }
-        .att-stat-card.absent::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
-        .att-stat-card.late::before { background: linear-gradient(180deg, #f59e0b, #d97706); }
+        .att-stat-card.total::before {
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .att-stat-card.present::before {
+            background: linear-gradient(180deg, #10b981, #059669);
+        }
+
+        .att-stat-card.absent::before {
+            background: linear-gradient(180deg, #ef4444, #dc2626);
+        }
+
+        .att-stat-card.late::before {
+            background: linear-gradient(180deg, #f59e0b, #d97706);
+        }
 
         .stat-icon-box {
             width: 48px;
@@ -420,22 +431,16 @@
         .emp-cell {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
         }
 
-        .emp-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            position: relative;
-        }
+       .emp-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
 
         .emp-avatar .online-dot {
             position: absolute;
@@ -530,7 +535,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
         }
 
@@ -644,14 +649,37 @@
         }
 
         /* === AVATAR COLORS === */
-        .avatar-gradient-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
-        .avatar-gradient-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
-        .avatar-gradient-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-        .avatar-gradient-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-        .avatar-gradient-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
-        .avatar-gradient-6 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
-        .avatar-gradient-7 { background: linear-gradient(135deg, #fccb90, #d57eeb); }
-        .avatar-gradient-8 { background: linear-gradient(135deg, #667eea, #f093fb); }
+        .avatar-gradient-1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .avatar-gradient-2 {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .avatar-gradient-3 {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .avatar-gradient-4 {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        .avatar-gradient-5 {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+        }
+
+        .avatar-gradient-6 {
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+        }
+
+        .avatar-gradient-7 {
+            background: linear-gradient(135deg, #fccb90, #d57eeb);
+        }
+
+        .avatar-gradient-8 {
+            background: linear-gradient(135deg, #667eea, #f093fb);
+        }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
@@ -712,6 +740,16 @@
                 font-size: 0.85rem;
                 border-radius: 10px;
             }
+
+            .att-table {
+                table-layout: fixed !important;
+                width: 100%;
+            }
+
+            .att-table td,
+            .att-table th {
+                vertical-align: middle;
+            }
         }
 
         @media (max-width: 480px) {
@@ -764,8 +802,13 @@
 
         /* === LOADING SKELETON (optional) === */
         @keyframes shimmer {
-            0% { background-position: -200px 0; }
-            100% { background-position: 200px 0; }
+            0% {
+                background-position: -200px 0;
+            }
+
+            100% {
+                background-position: 200px 0;
+            }
         }
 
         .skeleton {
@@ -832,47 +875,497 @@
                         <div class="menu-title">Holidays</div>
                     </a>
                 </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class="fa fa-bullhorn"></i></div>
+                        <div class="menu-title">Announcements</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="<?= base_url('admin/announcements') ?>">
+                                Announcement List
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<?= base_url('admin/announcements/add') ?>">
+                                Add Announcement
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- ====== END SIDEBAR ====== -->
 
         <!-- ====== HEADER (simplified) ====== -->
-        <header>
-            <div class="topbar">
-                <nav class="navbar navbar-expand gap-2 align-items-center">
-                    <div class="mobile-toggle-menu d-flex"><i class='bx bx-menu'></i></div>
-                    <div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
-                        <a href="javascript:;" class="btn d-flex align-items-center"><i class="bx bx-search"></i>Search</a>
-                    </div>
-                    <div class="top-menu ms-auto">
-                        <ul class="navbar-nav align-items-center gap-1">
-                            <li class="nav-item mobile-search-icon d-flex d-lg-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
-                                <a class="nav-link" href="javascript:;"><i class='bx bx-search'></i></a>
-                            </li>
-                            <li class="nav-item dark-mode d-none d-sm-flex">
-                                <a class="nav-link dark-mode-icon" href="javascript:;"><i class='bx bx-moon'></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="user-box dropdown px-3">
-                        <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="<?= base_url('assets/images/avatars/avatar-2.png') ?>" class="user-img" alt="user avatar">
-                            <div class="user-info">
-                                <p class="user-name mb-0">Admin</p>
-                                <p class="designattion mb-0">Administrator</p>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-user fs-5"></i><span>Profile</span></a></li>
-                            <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-cog fs-5"></i><span>Settings</span></a></li>
-                            <li><div class="dropdown-divider mb-0"></div></li>
-                            <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>Logout</span></a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <!-- ====== END HEADER ====== -->
+     	<header>
+			<div class="topbar">
+				<nav class="navbar navbar-expand gap-2 align-items-center">
+					<div class="mobile-toggle-menu d-flex"><i class='bx bx-menu'></i>
+					</div>
+
+					<div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
+						<!-- <a href="avascript:;" class="btn d-flex align-items-center"><i class="bx bx-search"></i>Search</a> -->
+					</div>
+
+					<div class="top-menu ms-auto">
+						<ul class="navbar-nav align-items-center gap-1">
+							<li class="nav-item mobile-search-icon d-flex d-lg-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
+								<a class="nav-link" href="avascript:;"><i class='bx bx-search'></i>
+								</a>
+							</li>
+							<li class="nav-item dark-mode d-none d-sm-flex">
+								<a class="nav-link dark-mode-icon" href="javascript:;"><i class='bx bx-moon'></i>
+								</a>
+							</li>
+
+							<li class="nav-item dropdown dropdown-app">
+								<div class="dropdown-menu dropdown-menu-end p-0">
+									<div class="app-container p-2 my-2">
+
+									</div>
+								</div>
+							</li>
+
+							<li class="nav-item dropdown dropdown-large">
+								<!-- <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" data-bs-toggle="dropdown"><span class="alert-count">7</span>
+									<i class='bx bx-bell'></i>
+								</a> -->
+								<div class="dropdown-menu dropdown-menu-end">
+									<a href="javascript:;">
+										<div class="msg-header">
+											<p class="msg-header-title">Notifications</p>
+											<p class="msg-header-badge">8 New</p>
+										</div>
+									</a>
+									<div class="header-notifications-list">
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="user-online">
+													<img src="<?= base_url('assets/images/avatars/avatar-1.png') ?>" class="msg-avatar" alt="user avatar">
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">Daisy Anderson<span class="msg-time float-end">5 sec
+															ago</span></h6>
+													<p class="msg-info">The standard chunk of lorem</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="notify bg-light-danger text-danger">dc
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
+															ago</span></h6>
+													<p class="msg-info">You have recived new orders</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="user-online">
+													<img src="<?= base_url('assets/images/avatars/avatar-2.png') ?>" class="msg-avatar" alt="user avatar">
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">Althea Cabardo <span class="msg-time float-end">14
+															sec ago</span></h6>
+													<p class="msg-info">Many desktop publishing packages</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="notify bg-light-success text-success">
+													<img src="assets/images/app/outlook.png" width="25" alt="user avatar">
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">Account Created<span class="msg-time float-end">28 min
+															ago</span></h6>
+													<p class="msg-info">Successfully created new email</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="notify bg-light-info text-info">Ss
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">New Product Approved <span
+															class="msg-time float-end">2 hrs ago</span></h6>
+													<p class="msg-info">Your new product has approved</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="user-online">
+													<img src="assets/images/avatars/avatar-4.png" class="msg-avatar" alt="user avatar">
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">Katherine Pechon <span class="msg-time float-end">15
+															min ago</span></h6>
+													<p class="msg-info">Making this the first true generator</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="notify bg-light-success text-success"><i class='bx bx-check-square'></i>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">Your item is shipped <span class="msg-time float-end">5 hrs
+															ago</span></h6>
+													<p class="msg-info">Successfully shipped your item</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="notify bg-light-primary">
+													<img src="assets/images/app/github.png" width="25" alt="user avatar">
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">New 24 authors<span class="msg-time float-end">1 day
+															ago</span></h6>
+													<p class="msg-info">24 new authors joined last week</p>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center">
+												<div class="user-online">
+													<img src="assets/images/avatars/avatar-8.png" class="msg-avatar" alt="user avatar">
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="msg-name">Peter Costanzo <span class="msg-time float-end">6 hrs
+															ago</span></h6>
+													<p class="msg-info">It was popularised in the 1960s</p>
+												</div>
+											</div>
+										</a>
+									</div>
+									<a href="javascript:;">
+										<div class="text-center msg-footer">
+											<button class="btn btn-primary w-100">View All Notifications</button>
+										</div>
+									</a>
+								</div>
+							</li>
+
+
+
+
+
+
+
+
+
+
+
+
+							<li class="nav-item dropdown dropdown-large">
+								<!-- <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
+									<i class='bx bx-shopping-bag'></i>
+								</a> -->
+								<div class="dropdown-menu dropdown-menu-end">
+									<a href="javascript:;">
+										<div class="msg-header">
+											<p class="msg-header-title">My Cart</p>
+											<p class="msg-header-badge">10 Items</p>
+										</div>
+									</a>
+									<div class="header-message-list">
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/11.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/02.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/03.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/04.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/05.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/06.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/07.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/08.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											<div class="d-flex align-items-center gap-3">
+												<div class="position-relative">
+													<div class="cart-product rounded-circle bg-light">
+														<img src="assets/images/products/09.png" class="" alt="product image">
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="cart-product-title mb-0">Men White T-Shirt</h6>
+													<p class="cart-product-price mb-0">1 X $29.00</p>
+												</div>
+												<div class="">
+													<p class="cart-price mb-0">$250</p>
+												</div>
+												<div class="cart-product-cancel"><i class="bx bx-x"></i>
+												</div>
+											</div>
+										</a>
+									</div>
+									<a href="javascript:;">
+										<div class="text-center msg-footer">
+											<div class="d-flex align-items-center justify-content-between mb-3">
+												<h5 class="mb-0">Total</h5>
+												<h5 class="mb-0 ms-auto">$489.00</h5>
+											</div>
+											<button class="btn btn-primary w-100">Checkout</button>
+										</div>
+									</a>
+								</div>
+							</li>
+						</ul>
+
+					</div>
+
+
+
+
+
+
+					<!-- <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle position-relative" href="#" data-bs-toggle="dropdown">
+        <i class="bx bx-bell"></i>
+
+        <?php if ($notification_count > 0): ?>
+            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                <?= $notification_count ?>
+            </span>
+        <?php endif; ?>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-end">
+        <?php foreach ($notifications as $n): ?>
+            <li>
+                <a class="dropdown-item"
+                   href="<?= base_url('admin/history/view/' . $n->ref_id) ?>">
+                    <?= $n->message ?><br>
+                    <small class="text-muted">
+                        <?= date('d M Y h:i A', strtotime($n->created_at)) ?>
+                    </small>
+                </a>
+            </li>
+        <?php endforeach; ?>
+
+        <?php if (empty($notifications)): ?>
+            <li class="dropdown-item text-muted">No new notifications</li>
+        <?php endif; ?>
+    </ul>
+</li> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<!-- <?= $this->session->userdata('user_photo'); ?> -->
+
+
+					<div class="user-box dropdown px-3">
+						<a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret"
+							href="<?= site_url('admin/profile'); ?>"
+							role="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">
+
+							<?php $photo = $this->session->userdata('user_photo'); ?>
+
+<img
+src="<?= !empty($photo)
+? base_url('uploads/profile/'.$photo)
+: base_url('assets/images/avatars/avatar-2.png'); ?>"
+class="user-img rounded-circle"
+width="40"
+height="40"
+style="object-fit:cover;">
+
+
+							<div class="user-info">
+								<p class="user-name mb-0 fw-semibold">
+									<?= htmlspecialchars(ucfirst($this->session->userdata('user_name') ?? 'User')) ?>
+
+
+								</p>
+								<p class="designattion mb-0 text-muted small">
+									Admin
+								</p>
+							</div>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<li><a class="dropdown-item d-flex align-items-center" href="<?= base_url('admin/profile') ?>"><i class="bx bx-user fs-5"></i><span>Profile</span></a>
+							</li>
+							
+							<li>
+								<div class="dropdown-divider mb-0"></div>
+							</li>
+							<li><a href="<?= base_url('admin/logout') ?>" 
+   onclick="return confirm('Are you sure you want to logout?')"
+   class="dropdown-item">
+    <i class="bx bx-log-out-circle"></i> Logout
+</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!--end header -->
 
         <!-- ====== ENHANCED PAGE CONTENT ====== -->
         <div class="page-wrapper">
@@ -896,16 +1389,7 @@
                             <p>Track and manage attendance records for all employees</p>
                         </div>
                     </div>
-                    <div class="att-header-actions">
-                        <button class="btn-export" onclick="window.print()">
-                            <i class='bx bx-printer'></i>
-                            Print
-                        </button>
-                        <button class="btn-export">
-                            <i class='bx bx-download'></i>
-                            Export
-                        </button>
-                    </div>
+                    
                 </div>
 
                 <!-- Stats Cards -->
@@ -924,7 +1408,7 @@
                             <i class='bx bx-check-circle'></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-number">—</div>
+                            <div class="stat-number"><?= $present_today ?></div>
                             <div class="stat-label">Present Today</div>
                         </div>
                     </div>
@@ -933,7 +1417,7 @@
                             <i class='bx bx-x-circle'></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-number">—</div>
+                            <div class="stat-number"><?= $absent_today ?></div> 
                             <div class="stat-label">Absent Today</div>
                         </div>
                     </div>
@@ -976,7 +1460,7 @@
                     <div class="att-card-body">
                         <?php if (!empty($employees)): ?>
                             <div class="table-responsive">
-								<table class="att-table" id="attendanceTable">
+                                <table class="att-table" id="attendanceTable">
                                     <thead>
                                         <tr>
                                             <th style="width: 60px;">#</th>
@@ -986,49 +1470,69 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      <?php
-$gradients = [
-'avatar-gradient-1','avatar-gradient-2','avatar-gradient-3',
-'avatar-gradient-4','avatar-gradient-5','avatar-gradient-6',
-'avatar-gradient-7','avatar-gradient-8'
-];
+                                        <?php
+                                        $gradients = [
+                                            'avatar-gradient-1',
+                                            'avatar-gradient-2',
+                                            'avatar-gradient-3',
+                                            'avatar-gradient-4',
+                                            'avatar-gradient-5',
+                                            'avatar-gradient-6',
+                                            'avatar-gradient-7',
+                                            'avatar-gradient-8'
+                                        ];
 
-$i = 0;
+                                        $i = 0;
 
-foreach ($employees as $emp):
+                                        foreach ($employees as $emp):
 
-    $initials = '-';
+                                            $initials = '-';
 
-    if (!empty($emp->emp_name)) {
+                                            if (!empty($emp->emp_name)) {
 
-        $nameParts = explode(' ', trim($emp->emp_name));
+                                                $nameParts = explode(' ', trim($emp->emp_name));
 
-        if (count($nameParts) > 1) {
+                                                if (count($nameParts) > 1) {
 
-            $first = substr($nameParts[0], 0, 1);
-            $last  = substr(end($nameParts), 0, 1);
+                                                    $first = substr($nameParts[0], 0, 1);
+                                                    $last  = substr(end($nameParts), 0, 1);
 
-            $initials = strtoupper($first . $last);
+                                                    $initials = strtoupper($first . $last);
+                                                } else {
 
-        } else {
+                                                    $initials = strtoupper(substr($emp->emp_name, 0, 1));
+                                                }
+                                            }
 
-            $initials = strtoupper(substr($emp->emp_name, 0, 1));
-        }
-    }
-
-    $gradientClass = $gradients[$i % count($gradients)];
-    $i++;
-?>
+                                            $gradientClass = $gradients[$i % count($gradients)];
+                                            $i++;
+                                        ?>
                                             <tr class="emp-row">
                                                 <td>
                                                     <span class="serial-num"><?= $i ?></span>
                                                 </td>
                                                 <td>
                                                     <div class="emp-cell">
-                                                        <div class="emp-avatar <?= $gradientClass ?>">
-                                                            <?= $initials ?>
-                                                            <span class="online-dot"></span>
-                                                        </div>
+                                                       <div class="emp-avatar">
+
+<?php if(!empty($emp->profile_image)): ?>
+
+<img src="<?= base_url('uploads/profile/'.$emp->profile_image) ?>"
+style="width:44px;height:44px;border-radius:12px;object-fit:cover;">
+
+<?php else: ?>
+
+<div class="<?= $gradientClass ?>"
+style="width:44px;height:44px;border-radius:12px;
+display:flex;align-items:center;justify-content:center;
+color:#fff;font-weight:700;">
+<?= $initials ?>
+</div>
+
+<?php endif; ?>
+
+<span class="online-dot"></span>
+</div>
                                                         <div class="emp-info">
                                                             <p class="emp-name"><?= ucfirst($emp->emp_name) ?></p>
                                                             <p class="emp-role">Employee</p>
@@ -1036,13 +1540,20 @@ foreach ($employees as $emp):
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <span class="status-pill active">
-                                                        <span class="dot"></span>
-                                                        Active
-                                                    </span>
+                                                   <?php if($emp->today_status == 'Present'): ?>
+<span class="status-pill active">
+    <span class="dot"></span>
+    Present
+</span>
+<?php else: ?>
+<span class="status-pill inactive">
+    <span class="dot"></span>
+    Absent
+</span>
+<?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <a href="<?= site_url('admin/attendance/view_details/'.$emp->id) ?>" class="btn-view-details">
+                                                    <a href="<?= site_url('admin/attendance/view_details/' . $emp->id) ?>" class="btn-view-details">
                                                         <span>View Details</span>
                                                         <i class='bx bx-right-arrow-alt'></i>
                                                     </a>
@@ -1098,17 +1609,17 @@ foreach ($employees as $emp):
     <script src="<?= base_url('assets/js/app.js') ?>"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
 
             // === Live Search Filter ===
             const searchInput = document.getElementById('employeeSearch');
             if (searchInput) {
-                searchInput.addEventListener('input', function () {
+                searchInput.addEventListener('input', function() {
                     const query = this.value.toLowerCase().trim();
                     const rows = document.querySelectorAll('.emp-row');
                     let visibleCount = 0;
 
-                    rows.forEach(function (row) {
+                    rows.forEach(function(row) {
                         const name = row.querySelector('.emp-name');
                         if (name) {
                             const text = name.textContent.toLowerCase();
@@ -1131,13 +1642,13 @@ foreach ($employees as $emp):
 
             // === Animate Stats on Scroll ===
             const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(function (el) {
+            statNumbers.forEach(function(el) {
                 const target = parseInt(el.textContent);
                 if (isNaN(target)) return;
 
                 let current = 0;
                 const increment = Math.ceil(target / 30);
-                const timer = setInterval(function () {
+                const timer = setInterval(function() {
                     current += increment;
                     if (current >= target) {
                         current = target;
@@ -1149,12 +1660,12 @@ foreach ($employees as $emp):
 
             // === Row Entrance Animation ===
             const rows = document.querySelectorAll('.emp-row');
-            rows.forEach(function (row, index) {
+            rows.forEach(function(row, index) {
                 row.style.opacity = '0';
                 row.style.transform = 'translateY(10px)';
                 row.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
 
-                setTimeout(function () {
+                setTimeout(function() {
                     row.style.opacity = '1';
                     row.style.transform = 'translateY(0)';
                 }, 60 * index);
@@ -1162,12 +1673,12 @@ foreach ($employees as $emp):
 
             // === Stat Card Entrance ===
             const statCards = document.querySelectorAll('.att-stat-card');
-            statCards.forEach(function (card, index) {
+            statCards.forEach(function(card, index) {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
 
-                setTimeout(function () {
+                setTimeout(function() {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, 100 * index);

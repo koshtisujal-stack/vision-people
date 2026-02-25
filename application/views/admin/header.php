@@ -186,7 +186,7 @@
 					</div>
 
 					<div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
-						<a href="avascript:;" class="btn d-flex align-items-center"><i class="bx bx-search"></i>Search</a>
+						<!-- <a href="avascript:;" class="btn d-flex align-items-center"><i class="bx bx-search"></i>Search</a> -->
 					</div>
 
 					<div class="top-menu ms-auto">
@@ -209,9 +209,9 @@
 							</li>
 
 							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" data-bs-toggle="dropdown"><span class="alert-count">7</span>
+								<!-- <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" data-bs-toggle="dropdown"><span class="alert-count">7</span>
 									<i class='bx bx-bell'></i>
-								</a>
+								</a> -->
 								<div class="dropdown-menu dropdown-menu-end">
 									<a href="javascript:;">
 										<div class="msg-header">
@@ -346,9 +346,9 @@
 
 
 							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
+								<!-- <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
 									<i class='bx bx-shopping-bag'></i>
-								</a>
+								</a> -->
 								<div class="dropdown-menu dropdown-menu-end">
 									<a href="javascript:;">
 										<div class="msg-header">
@@ -593,29 +593,26 @@
 
 
 
-					<?= $this->session->userdata('user_photo'); ?>
+					<!-- <?= $this->session->userdata('user_photo'); ?> -->
 
 
 					<div class="user-box dropdown px-3">
 						<a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret"
-							href="<?= site_url('emp/profile'); ?>"
+							href="<?= site_url('admin/profile'); ?>"
 							role="button"
 							data-bs-toggle="dropdown"
 							aria-expanded="false">
 
-							<?php
-							$photo = $this->session->userdata('user_photo');
-							?>
+							<?php $photo = $this->session->userdata('user_photo'); ?>
 
-							<img
-								src="<?= !empty($userPhoto)
-											? base_url('uploads/profile/' . $userPhoto)
-											: base_url('uploads\profile\5ae061698011c1dede095beff867fcc6.png'); ?>"
-											
-								class="user-img rounded-circle"
-								width="40"
-								height="40"
-								style="object-fit: cover;">
+<img
+src="<?= !empty($photo)
+? base_url('uploads/profile/'.$photo)
+: base_url('assets/images/avatars/avatar-2.png'); ?>"
+class="user-img rounded-circle"
+width="40"
+height="40"
+style="object-fit:cover;">
 
 
 							<div class="user-info">
@@ -632,14 +629,7 @@
 						<ul class="dropdown-menu dropdown-menu-end">
 							<li><a class="dropdown-item d-flex align-items-center" href="profile"><i class="bx bx-user fs-5"></i><span>Profile</span></a>
 							</li>
-							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-cog fs-5"></i><span>Settings</span></a>
-							</li>
-							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-home-circle fs-5"></i><span>Dashboard</span></a>
-							</li>
-							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-dollar-circle fs-5"></i><span>Earnings</span></a>
-							</li>
-							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-download fs-5"></i><span>Downloads</span></a>
-							</li>
+							
 							<li>
 								<div class="dropdown-divider mb-0"></div>
 							</li>

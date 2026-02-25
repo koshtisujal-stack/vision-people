@@ -20,9 +20,9 @@ class Leave extends CI_Controller {
     {
         return [
             'user' => $this->db
-                ->where('id', $this->session->userdata('user_id'))
-                ->get('employees')
-                ->row(),
+    ->where('id', $this->session->userdata('user_id'))
+    ->get('users')
+    ->row(),
 
             'userRole'  => $this->session->userdata('user_role'),
             'userName'  => $this->session->userdata('user_name'),
@@ -51,9 +51,10 @@ class Leave extends CI_Controller {
 
         
         $data['employees'] = $this->db
-            ->where('role', 'emp')
-            ->get('employees')
-            ->result();
+        ->where('role', 0)        // 0 = emp (as per your users table ss)
+        ->where('is_active', 1)
+        ->get('users')
+        ->result();
 
         $this->load->view('emp/headerr', $data);
         $this->load->view('emp/leave/add', $data);
@@ -65,14 +66,10 @@ class Leave extends CI_Controller {
 {
     $this->db->insert('leaves', [
 
-        // ✅ SESSION se logged in employee lo
-        'user_id'    => $this->session->userdata('user_id'),
-
+        'user_id'    => $this->input->post('employee_id'),
         'leave_date' => $this->input->post('leave_date'),
         'leave_type' => $this->input->post('leave_type'),
         'reason'     => $this->input->post('reason'),
-
-        // ✅ Default Pending hi rahega
         'status'     => 'Pending'
     ]);
 

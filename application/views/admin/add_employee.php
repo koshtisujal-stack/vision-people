@@ -87,7 +87,7 @@
         color: #fff;
     }
 
-    .breadcrumb-nav .breadcrumb-item + .breadcrumb-item::before {
+    .breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before {
         color: rgba(255, 255, 255, 0.5);
         content: "›";
         font-size: 18px;
@@ -144,6 +144,7 @@
             opacity: 0;
             transform: translateY(-10px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -269,8 +270,8 @@
         padding-left: 44px;
     }
 
-    .input-icon-group textarea.form-control + .input-icon,
-    .input-icon-group textarea ~ .input-icon-textarea {
+    .input-icon-group textarea.form-control+.input-icon,
+    .input-icon-group textarea~.input-icon-textarea {
         top: 18px;
         transform: none;
     }
@@ -405,7 +406,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         transition: left 0.5s;
     }
 
@@ -513,8 +514,15 @@
 
     /* Floating Animation */
     @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-6px); }
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
     }
 
     .floating {
@@ -673,23 +681,23 @@
 
         <!-- Flash Messages -->
         <?php if ($this->session->flashdata('error')): ?>
-        <div class="custom-alert alert-danger" role="alert">
-            <div class="alert-icon"><i class="bx bx-error-circle"></i></div>
-            <div>
-                <strong>Oops!</strong> <?= $this->session->flashdata('error'); ?>
+            <div class="custom-alert alert-danger" role="alert">
+                <div class="alert-icon"><i class="bx bx-error-circle"></i></div>
+                <div>
+                    <strong>Oops!</strong> <?= $this->session->flashdata('error'); ?>
+                </div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style="font-size:12px;"></button>
             </div>
-            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style="font-size:12px;"></button>
-        </div>
         <?php endif; ?>
 
         <?php if ($this->session->flashdata('success')): ?>
-        <div class="custom-alert alert-success" role="alert">
-            <div class="alert-icon"><i class="bx bx-check-circle"></i></div>
-            <div>
-                <strong>Success!</strong> <?= $this->session->flashdata('success'); ?>
+            <div class="custom-alert alert-success" role="alert">
+                <div class="alert-icon"><i class="bx bx-check-circle"></i></div>
+                <div>
+                    <strong>Success!</strong> <?= $this->session->flashdata('success'); ?>
+                </div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style="font-size:12px;"></button>
             </div>
-            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close" style="font-size:12px;"></button>
-        </div>
         <?php endif; ?>
 
         <!-- Main Content -->
@@ -733,10 +741,10 @@
                         </div>
 
                         <form method="post"
-                              action="<?= base_url('admin/employee/add') ?>"
-                              class="needs-validation"
-                              id="employeeForm"
-                              novalidate>
+                            action="<?= base_url('admin/employee/add') ?>"
+                            class="needs-validation"
+                            id="employeeForm"
+                            novalidate>
 
                             <!-- Section 1: Personal Info -->
                             <div class="form-section">
@@ -761,50 +769,54 @@
                                 </div>
 
                                 <!-- Full Name -->
-                                <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Full Name <span class="required">*</span>
-                                        <span class="field-hint" data-bs-toggle="tooltip" title="Enter employee's legal full name">?</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group">
-                                            <i class="bx bx-user input-icon"></i>
-                                            <input type="text"
-                                                   class="form-control"
-                                                   name="yourname"
-                                                   placeholder="e.g. John Doe"
-                                                   required
-                                                   minlength="2"
-                                                   maxlength="100"
-                                                   autocomplete="name">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please enter the employee's full name
-                                        </div>
-                                    </div>
-                                </div>
+                              <div class="row mb-3 form-row-highlight">
+    <label class="col-sm-3 col-form-label">
+        Full Name <span class="required">*</span>
+    </label>
+
+    <div class="col-sm-9">
+        <div class="input-icon-group">
+            <i class="bx bx-user input-icon"></i>
+
+            <input type="text"
+            name="yourname"
+            value="<?= set_value('yourname') ?>"
+            class="form-control <?= form_error('yourname') ? 'is-invalid' : '' ?>"
+            placeholder="e.g. John Doe">
+        </div>
+
+        <?php if(form_error('yourname')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('yourname') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
 
                                 <!-- Phone -->
                                 <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Phone Number <span class="required">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group">
-                                            <i class="bx bx-phone input-icon"></i>
-                                            <input type="tel"
-                                                   class="form-control"
-                                                   name="phone"
-                                                   placeholder="e.g. +91 98765 43210"
-                                                   required
-                                                   pattern="[0-9+\-\s]{7,15}"
-                                                   autocomplete="tel">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please enter a valid phone number
-                                        </div>
-                                    </div>
-                                </div>
+    <label class="col-sm-3 col-form-label">
+        Phone Number <span class="required">*</span>
+    </label>
+
+    <div class="col-sm-9">
+        <div class="input-icon-group">
+            <i class="bx bx-phone input-icon"></i>
+
+            <input type="tel"
+            name="phone"
+            value="<?= set_value('phone') ?>"
+            class="form-control <?= form_error('phone') ? 'is-invalid' : '' ?>"
+            placeholder="e.g. +91 98765 43210">
+        </div>
+
+        <?php if(form_error('phone')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('phone') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
                             </div>
 
                             <!-- Section 2: Account Details -->
@@ -814,108 +826,102 @@
                                 </div>
 
                                 <!-- Username -->
-                                <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Username <span class="required">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group">
-                                            <i class="bx bx-at input-icon"></i>
-                                            <input type="text"
-                                                   class="form-control"
-                                                   name="username"
-                                                   placeholder="e.g. johndoe"
-                                                   required
-                                                   minlength="3"
-                                                   maxlength="30"
-                                                   pattern="[a-zA-Z0-9_]+"
-                                                   autocomplete="username">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Username must be 3+ characters (letters, numbers, underscores only)
-                                        </div>
-                                    </div>
-                                </div>
+                               <div class="row mb-3 form-row-highlight">
+    <label class="col-sm-3 col-form-label">
+        Username <span class="required">*</span>
+    </label>
+
+    <div class="col-sm-9">
+        <div class="input-icon-group">
+            <i class="bx bx-at input-icon"></i>
+
+            <input type="text"
+            name="username"
+            value="<?= set_value('username') ?>"
+            class="form-control <?= form_error('username') ? 'is-invalid' : '' ?>"
+            placeholder="e.g. johndoe">
+        </div>
+
+        <?php if(form_error('username')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('username') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
 
                                 <!-- Email -->
-                                <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Email Address <span class="required">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group">
-                                            <i class="bx bx-envelope input-icon"></i>
-                                            <input type="email"
-                                                   class="form-control"
-                                                   name="email"
-                                                   placeholder="e.g. john@company.com"
-                                                   required
-                                                   autocomplete="email">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please enter a valid email address
-                                        </div>
-                                    </div>
-                                </div>
+                              <div class="row mb-3 form-row-highlight">
+    <label class="col-sm-3 col-form-label">
+        Email Address <span class="required">*</span>
+    </label>
+
+    <div class="col-sm-9">
+        <div class="input-icon-group">
+            <i class="bx bx-envelope input-icon"></i>
+
+            <input type="email"
+            name="email"
+            value="<?= set_value('email') ?>"
+            class="form-control <?= form_error('email') ? 'is-invalid' : '' ?>"
+            placeholder="e.g. john@company.com">
+        </div>
+
+        <?php if(form_error('email')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('email') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
 
                                 <!-- Password -->
-                                <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Password <span class="required">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group position-relative">
-                                            <i class="bx bx-lock input-icon"></i>
-                                            <input type="password"
-                                                   class="form-control"
-                                                   name="password"
-                                                   id="password"
-                                                   placeholder="Min. 8 characters"
-                                                   required
-                                                   minlength="8"
-                                                   autocomplete="new-password"
-                                                   style="padding-right: 44px;">
-                                            <button type="button" class="password-toggle" onclick="togglePassword('password', this)">
-                                                <i class="bx bx-hide"></i>
-                                            </button>
-                                        </div>
-                                        <div class="password-strength" id="passwordStrength">
-                                            <div class="strength-bar">
-                                                <div class="strength-bar-fill" id="strengthBarFill"></div>
-                                            </div>
-                                            <span class="strength-text" id="strengthText"></span>
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Password must be at least 8 characters
-                                        </div>
-                                    </div>
-                                </div>
+                              <div class="row mb-3 form-row-highlight">
+    <label class="col-sm-3 col-form-label">
+        Password <span class="required">*</span>
+    </label>
+
+    <div class="col-sm-9">
+        <div class="input-icon-group position-relative">
+            <i class="bx bx-lock input-icon"></i>
+
+            <input type="password"
+            name="password"
+            class="form-control <?= form_error('password') ? 'is-invalid' : '' ?>"
+            placeholder="Min. 8 characters">
+        </div>
+
+        <?php if(form_error('password')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('password') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
 
                                 <!-- Confirm Password -->
-                                <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Confirm Password <span class="required">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group position-relative">
-                                            <i class="bx bx-lock-open input-icon"></i>
-                                            <input type="password"
-                                                   class="form-control"
-                                                   name="confirm_password"
-                                                   id="confirmPassword"
-                                                   placeholder="Re-enter password"
-                                                   required
-                                                   autocomplete="new-password"
-                                                   style="padding-right: 44px;">
-                                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)">
-                                                <i class="bx bx-hide"></i>
-                                            </button>
-                                        </div>
-                                        <div class="invalid-feedback" id="confirmFeedback">
-                                            Please confirm your password
-                                        </div>
-                                    </div>
-                                </div>
+                              <div class="row mb-3 form-row-highlight">
+    <label class="col-sm-3 col-form-label">
+        Confirm Password <span class="required">*</span>
+    </label>
+
+    <div class="col-sm-9">
+        <div class="input-icon-group position-relative">
+            <i class="bx bx-lock-open input-icon"></i>
+
+            <input type="password"
+            name="confirm_password"
+            class="form-control <?= form_error('confirm_password') ? 'is-invalid' : '' ?>"
+            placeholder="Confirm Password">
+        </div>
+
+        <?php if(form_error('confirm_password')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('confirm_password') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
                             </div>
 
                             <!-- Section 3: Location -->
@@ -925,53 +931,56 @@
                                 </div>
 
                                 <!-- Country -->
-                                <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Country <span class="required">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group">
-                                            <i class="bx bx-globe input-icon"></i>
-                                            <select class="form-select" name="country" required>
-                                                <option value="">Select a country...</option>
-                                                <option value="India">🇮🇳 India</option>
-                                                <option value="USA">🇺🇸 United States</option>
-                                                <option value="UK">🇬🇧 United Kingdom</option>
-                                                <option value="Canada">🇨🇦 Canada</option>
-                                                <option value="Australia">🇦🇺 Australia</option>
-                                                <option value="Germany">🇩🇪 Germany</option>
-                                            </select>
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please select a country
-                                        </div>
-                                    </div>
-                                </div>
+                               <div class="row mb-3 form-row-highlight">
+    <label class="col-sm-3 col-form-label">
+        Country <span class="required">*</span>
+    </label>
 
+    <div class="col-sm-9">
+        <div class="input-icon-group">
+            <i class="bx bx-globe input-icon"></i>
+
+            <select name="country"
+            class="form-select <?= form_error('country') ? 'is-invalid' : '' ?>">
+                <option value="">Select Country</option>
+                <option value="India" <?= set_select('country','India') ?>>India</option>
+                <option value="USA" <?= set_select('country','USA') ?>>USA</option>
+                <option value="UK" <?= set_select('country','UK') ?>>UK</option>
+                <option value="Canada" <?= set_select('country','Canada') ?>>Canada</option>
+                <option value="Australia" <?= set_select('country','Australia') ?>>Australia</option>
+            </select>
+        </div>
+
+        <?php if(form_error('country')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('country') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
                                 <!-- Address -->
-                                <div class="row mb-3 form-row-highlight">
-                                    <label class="col-sm-3 col-form-label">
-                                        Address <span class="required">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <div class="input-icon-group">
-                                            <i class="bx bx-map-pin input-icon" style="top:18px; transform:none;"></i>
-                                            <textarea class="form-control"
-                                                      name="address"
-                                                      id="addressField"
-                                                      rows="3"
-                                                      placeholder="Enter full address..."
-                                                      required
-                                                      maxlength="250"></textarea>
-                                        </div>
-                                        <div class="char-counter">
-                                            <span id="charCount">0</span> / 250 characters
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Address is required
-                                        </div>
-                                    </div>
-                                </div>
+                             <div class="row mb-3 form-row-highlight">
+    <label class="col-sm-3 col-form-label">
+        Address <span class="required">*</span>
+    </label>
+
+    <div class="col-sm-9">
+        <div class="input-icon-group">
+            <i class="bx bx-map-pin input-icon" style="top:18px;"></i>
+
+            <textarea name="address"
+            rows="3"
+            class="form-control <?= form_error('address') ? 'is-invalid' : '' ?>"
+            placeholder="Enter full address..."><?= set_value('address') ?></textarea>
+        </div>
+
+        <?php if(form_error('address')): ?>
+        <div class="invalid-feedback d-block">
+            <?= form_error('address') ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
                             </div>
 
                             <!-- Action Buttons -->
@@ -1003,7 +1012,7 @@
                             <div>
                                 <h6 style="margin:0; font-weight:600; color:#2d3748; font-size:14px;">Need Help?</h6>
                                 <p style="margin:0; font-size:13px; color:#a0aec0;">
-                                    If you encounter any issues while adding an employee, 
+                                    If you encounter any issues while adding an employee,
                                     please contact <a href="#" style="color:#667eea; text-decoration:none; font-weight:600;">support@company.com</a>
                                 </p>
                             </div>
@@ -1020,190 +1029,215 @@
 <!--end page wrapper -->
 
 <script>
-$(document).ready(function () {
-    // Initialize tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function (el) {
-        return new bootstrap.Tooltip(el);
-    });
-
-    // DataTable (if present)
-    if ($('#example').length) {
-        $('#example').DataTable({
-            pageLength: 10,
-            lengthMenu: [5, 10, 25, 50, 100],
-            paging: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            responsive: true
+    $(document).ready(function() {
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function(el) {
+            return new bootstrap.Tooltip(el);
         });
-    }
-});
 
-// ─── Bootstrap Validation ───
-(function () {
-    'use strict';
-    const forms = document.querySelectorAll('.needs-validation');
-    Array.from(forms).forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-            // Check password match
-            const pw = document.getElementById('password');
-            const cpw = document.getElementById('confirmPassword');
-            if (pw.value !== cpw.value) {
-                cpw.setCustomValidity('Passwords do not match');
-                document.getElementById('confirmFeedback').textContent = 'Passwords do not match';
-            } else {
-                cpw.setCustomValidity('');
-            }
-
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
+        // DataTable (if present)
+        if ($('#example').length) {
+            $('#example').DataTable({
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                responsive: true
+            });
+        }
     });
-})();
 
-// ─── Password Toggle ───
-function togglePassword(fieldId, btn) {
-    const field = document.getElementById(fieldId);
-    const icon = btn.querySelector('i');
-    if (field.type === 'password') {
-        field.type = 'text';
-        icon.classList.replace('bx-hide', 'bx-show');
-    } else {
-        field.type = 'password';
-        icon.classList.replace('bx-show', 'bx-hide');
-    }
-}
+    // ─── Bootstrap Validation ───
+    (function() {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                // Check password match
+                const pw = document.getElementById('password');
+                const cpw = document.getElementById('confirmPassword');
+                if (pw.value !== cpw.value) {
+                    cpw.setCustomValidity('Passwords do not match');
+                    document.getElementById('confirmFeedback').textContent = 'Passwords do not match';
+                } else {
+                    cpw.setCustomValidity('');
+                }
 
-// ─── Password Strength Meter ───
-document.getElementById('password').addEventListener('input', function () {
-    const val = this.value;
-    const bar = document.getElementById('strengthBarFill');
-    const text = document.getElementById('strengthText');
-    let score = 0;
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
 
-    if (val.length >= 8)  score++;
-    if (val.length >= 12) score++;
-    if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
-    if (/\d/.test(val))   score++;
-    if (/[^a-zA-Z0-9]/.test(val)) score++;
-
-    const levels = [
-        { width: '0%',   color: '#e2e8f0', label: '' },
-        { width: '20%',  color: '#e53e3e', label: 'Very Weak' },
-        { width: '40%',  color: '#ed8936', label: 'Weak' },
-        { width: '60%',  color: '#ecc94b', label: 'Fair' },
-        { width: '80%',  color: '#48bb78', label: 'Strong' },
-        { width: '100%', color: '#38a169', label: 'Very Strong' }
-    ];
-
-    const level = levels[score] || levels[0];
-    bar.style.width      = level.width;
-    bar.style.background = level.color;
-    text.textContent      = level.label;
-    text.style.color      = level.color;
-});
-
-// ─── Character Counter for Address ───
-document.getElementById('addressField').addEventListener('input', function () {
-    document.getElementById('charCount').textContent = this.value.length;
-});
-
-// ─── Step Indicator Updates ───
-const formInputs = document.querySelectorAll('#employeeForm input, #employeeForm select, #employeeForm textarea');
-formInputs.forEach(function (input) {
-    input.addEventListener('input', updateSteps);
-    input.addEventListener('change', updateSteps);
-});
-
-function updateSteps() {
-    const form = document.getElementById('employeeForm');
-    const nameVal    = form.querySelector('[name="yourname"]').value.trim();
-    const phoneVal   = form.querySelector('[name="phone"]').value.trim();
-    const userVal    = form.querySelector('[name="username"]').value.trim();
-    const emailVal   = form.querySelector('[name="email"]').value.trim();
-    const pwVal      = form.querySelector('[name="password"]').value;
-    const cpwVal     = form.querySelector('[name="confirm_password"]').value;
-    const countryVal = form.querySelector('[name="country"]').value;
-    const addrVal    = form.querySelector('[name="address"]').value.trim();
-
-    const s1 = document.getElementById('step1');
-    const s2 = document.getElementById('step2');
-    const s3 = document.getElementById('step3');
-
-    // Step 1 — Personal
-    const step1Done = nameVal.length >= 2 && phoneVal.length >= 7;
-    s1.className = step1Done ? 'form-step completed' : 'form-step active';
-
-    // Step 2 — Account
-    const step2Done = userVal.length >= 3 && emailVal.includes('@') && pwVal.length >= 8 && cpwVal === pwVal;
-    if (step1Done && step2Done) {
-        s2.className = 'form-step completed';
-    } else if (step1Done) {
-        s2.className = 'form-step active';
-    } else {
-        s2.className = 'form-step';
+    // ─── Password Toggle ───
+    function togglePassword(fieldId, btn) {
+        const field = document.getElementById(fieldId);
+        const icon = btn.querySelector('i');
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.classList.replace('bx-hide', 'bx-show');
+        } else {
+            field.type = 'password';
+            icon.classList.replace('bx-show', 'bx-hide');
+        }
     }
 
-    // Step 3 — Location
-    const step3Done = countryVal !== '' && addrVal.length > 0;
-    if (step1Done && step2Done && step3Done) {
-        s3.className = 'form-step completed';
-    } else if (step1Done && step2Done) {
-        s3.className = 'form-step active';
-    } else {
-        s3.className = 'form-step';
-    }
-}
+    // ─── Password Strength Meter ───
+    document.getElementById('password').addEventListener('input', function() {
+        const val = this.value;
+        const bar = document.getElementById('strengthBarFill');
+        const text = document.getElementById('strengthText');
+        let score = 0;
 
-// ─── Reset form also resets steps & strength ───
-document.getElementById('resetBtn').addEventListener('click', function () {
-    setTimeout(function () {
-        document.getElementById('strengthBarFill').style.width = '0%';
-        document.getElementById('strengthText').textContent = '';
-        document.getElementById('charCount').textContent = '0';
-        document.getElementById('step1').className = 'form-step active';
-        document.getElementById('step2').className = 'form-step';
-        document.getElementById('step3').className = 'form-step';
-        document.getElementById('employeeForm').classList.remove('was-validated');
-    }, 50);
-});
+        if (val.length >= 8) score++;
+        if (val.length >= 12) score++;
+        if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
+        if (/\d/.test(val)) score++;
+        if (/[^a-zA-Z0-9]/.test(val)) score++;
 
-// ─── Avatar preview ───
-document.getElementById('avatarInput').addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (ev) {
-            const placeholder = document.querySelector('.avatar-placeholder');
-            placeholder.innerHTML = '<img src="' + ev.target.result + '" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">';
-        };
-        reader.readAsDataURL(file);
-    }
-});
+        const levels = [{
+                width: '0%',
+                color: '#e2e8f0',
+                label: ''
+            },
+            {
+                width: '20%',
+                color: '#e53e3e',
+                label: 'Very Weak'
+            },
+            {
+                width: '40%',
+                color: '#ed8936',
+                label: 'Weak'
+            },
+            {
+                width: '60%',
+                color: '#ecc94b',
+                label: 'Fair'
+            },
+            {
+                width: '80%',
+                color: '#48bb78',
+                label: 'Strong'
+            },
+            {
+                width: '100%',
+                color: '#38a169',
+                label: 'Very Strong'
+            }
+        ];
 
-// ─── Confirm password live check ───
-document.getElementById('confirmPassword').addEventListener('input', function () {
-    const pw = document.getElementById('password').value;
-    if (this.value && this.value !== pw) {
-        this.setCustomValidity('Passwords do not match');
-        document.getElementById('confirmFeedback').textContent = 'Passwords do not match';
-    } else {
-        this.setCustomValidity('');
-        document.getElementById('confirmFeedback').textContent = 'Please confirm your password';
-    }
-});
-
-// ─── Auto-dismiss flash alerts ───
-setTimeout(function () {
-    document.querySelectorAll('.custom-alert').forEach(function (el) {
-        el.style.transition = 'opacity 0.5s';
-        el.style.opacity = '0';
-        setTimeout(function () { el.remove(); }, 500);
+        const level = levels[score] || levels[0];
+        bar.style.width = level.width;
+        bar.style.background = level.color;
+        text.textContent = level.label;
+        text.style.color = level.color;
     });
-}, 5000);
+
+    // ─── Character Counter for Address ───
+    document.getElementById('addressField').addEventListener('input', function() {
+        document.getElementById('charCount').textContent = this.value.length;
+    });
+
+    // ─── Step Indicator Updates ───
+    const formInputs = document.querySelectorAll('#employeeForm input, #employeeForm select, #employeeForm textarea');
+    formInputs.forEach(function(input) {
+        input.addEventListener('input', updateSteps);
+        input.addEventListener('change', updateSteps);
+    });
+
+    function updateSteps() {
+        const form = document.getElementById('employeeForm');
+        const nameVal = form.querySelector('[name="yourname"]').value.trim();
+        const phoneVal = form.querySelector('[name="phone"]').value.trim();
+        const userVal = form.querySelector('[name="username"]').value.trim();
+        const emailVal = form.querySelector('[name="email"]').value.trim();
+        const pwVal = form.querySelector('[name="password"]').value;
+        const cpwVal = form.querySelector('[name="confirm_password"]').value;
+        const countryVal = form.querySelector('[name="country"]').value;
+        const addrVal = form.querySelector('[name="address"]').value.trim();
+
+        const s1 = document.getElementById('step1');
+        const s2 = document.getElementById('step2');
+        const s3 = document.getElementById('step3');
+
+        // Step 1 — Personal
+        const step1Done = nameVal.length >= 2 && phoneVal.length >= 7;
+        s1.className = step1Done ? 'form-step completed' : 'form-step active';
+
+        // Step 2 — Account
+        const step2Done = userVal.length >= 3 && emailVal.includes('@') && pwVal.length >= 8 && cpwVal === pwVal;
+        if (step1Done && step2Done) {
+            s2.className = 'form-step completed';
+        } else if (step1Done) {
+            s2.className = 'form-step active';
+        } else {
+            s2.className = 'form-step';
+        }
+
+        // Step 3 — Location
+        const step3Done = countryVal !== '' && addrVal.length > 0;
+        if (step1Done && step2Done && step3Done) {
+            s3.className = 'form-step completed';
+        } else if (step1Done && step2Done) {
+            s3.className = 'form-step active';
+        } else {
+            s3.className = 'form-step';
+        }
+    }
+
+    // ─── Reset form also resets steps & strength ───
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        setTimeout(function() {
+            document.getElementById('strengthBarFill').style.width = '0%';
+            document.getElementById('strengthText').textContent = '';
+            document.getElementById('charCount').textContent = '0';
+            document.getElementById('step1').className = 'form-step active';
+            document.getElementById('step2').className = 'form-step';
+            document.getElementById('step3').className = 'form-step';
+            document.getElementById('employeeForm').classList.remove('was-validated');
+        }, 50);
+    });
+
+    // ─── Avatar preview ───
+    document.getElementById('avatarInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const placeholder = document.querySelector('.avatar-placeholder');
+                placeholder.innerHTML = '<img src="' + ev.target.result + '" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // ─── Confirm password live check ───
+    document.getElementById('confirmPassword').addEventListener('input', function() {
+        const pw = document.getElementById('password').value;
+        if (this.value && this.value !== pw) {
+            this.setCustomValidity('Passwords do not match');
+            document.getElementById('confirmFeedback').textContent = 'Passwords do not match';
+        } else {
+            this.setCustomValidity('');
+            document.getElementById('confirmFeedback').textContent = 'Please confirm your password';
+        }
+    });
+
+    // ─── Auto-dismiss flash alerts ───
+    setTimeout(function() {
+        document.querySelectorAll('.custom-alert').forEach(function(el) {
+            el.style.transition = 'opacity 0.5s';
+            el.style.opacity = '0';
+            setTimeout(function() {
+                el.remove();
+            }, 500);
+        });
+    }, 5000);
 </script>
